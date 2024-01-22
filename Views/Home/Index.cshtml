@@ -1,8 +1,12 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Upload Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Choose your configuration file:</h1>
+    @using (Html.BeginForm("UploadConfigFile", "Config", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <input type="file" name="configFile" id="configFile" accept=".json" />
+        <button type="submit">Upload File</button>
+    }
 </div>

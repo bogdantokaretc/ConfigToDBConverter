@@ -1,0 +1,37 @@
+﻿@using Microsoft.AspNetCore.Html
+
+@model List<ConfigDataModel>
+
+<h2>Configuration Tree</h2>
+
+<ul>
+    @foreach (var item in Model.Where(c => c.ParentID == null))
+    {
+        <li>
+            @{DisplayConfiguration(item);}
+        </li>
+    }
+</ul>
+
+@{
+	void DisplayConfiguration(ConfigDataModel config)
+	{
+		<div>
+			@config.Name: @config.Value
+		</div>
+
+		if (Model.Any(c => c.ParentID == config.ID))
+		{
+			<ul>
+				@foreach (var child in Model.Where(c => c.ParentID == config.ID))
+				{
+					<li>
+						@{
+							DisplayConfiguration(child);
+						}
+					</li>
+				}
+			</ul>
+		}
+	}
+}
